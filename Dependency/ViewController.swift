@@ -6,14 +6,15 @@
 //
 
 import UIKit
+import Factory
 
 class ViewController: UIViewController {
 
+    @Injected(\.myLib) var myLib
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        myLib.print()
     }
 
-
 }
-

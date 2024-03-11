@@ -3,19 +3,25 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		83687F522B9F7C0A0070DDF9 /* ServiceRegistery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83687F512B9F7C0A0070DDF9 /* ServiceRegistery.swift */; };
+		837385D62B9F7F9E00EB2946 /* MyLib_Wiring in Frameworks */ = {isa = PBXBuildFile; productRef = 837385D52B9F7F9E00EB2946 /* MyLib_Wiring */; };
+		837385DD2B9FA07700EB2946 /* CoreLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 837385DC2B9FA07700EB2946 /* CoreLibrary */; };
 		839167B72B9F262D00F7C98B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839167B62B9F262D00F7C98B /* AppDelegate.swift */; };
 		839167B92B9F262D00F7C98B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839167B82B9F262D00F7C98B /* SceneDelegate.swift */; };
 		839167BB2B9F262D00F7C98B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839167BA2B9F262D00F7C98B /* ViewController.swift */; };
 		839167BE2B9F262D00F7C98B /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 839167BD2B9F262D00F7C98B /* Base */; };
 		839167C02B9F262E00F7C98B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 839167BF2B9F262E00F7C98B /* Assets.xcassets */; };
 		839167C32B9F262E00F7C98B /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 839167C22B9F262E00F7C98B /* Base */; };
+		839167CC2B9F267D00F7C98B /* MyLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 839167CB2B9F267D00F7C98B /* MyLibrary */; };
+		83E35C4B2B9FA102008EB138 /* CoreLibrary_Wiring in Frameworks */ = {isa = PBXBuildFile; productRef = 83E35C4A2B9FA102008EB138 /* CoreLibrary_Wiring */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		83687F512B9F7C0A0070DDF9 /* ServiceRegistery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceRegistery.swift; sourceTree = "<group>"; };
 		839167B32B9F262D00F7C98B /* Dependency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dependency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		839167B62B9F262D00F7C98B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		839167B82B9F262D00F7C98B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,6 +37,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				837385D62B9F7F9E00EB2946 /* MyLib_Wiring in Frameworks */,
+				837385DD2B9FA07700EB2946 /* CoreLibrary in Frameworks */,
+				839167CC2B9F267D00F7C98B /* MyLibrary in Frameworks */,
+				83E35C4B2B9FA102008EB138 /* CoreLibrary_Wiring in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +52,7 @@
 			children = (
 				839167B52B9F262D00F7C98B /* Dependency */,
 				839167B42B9F262D00F7C98B /* Products */,
+				92D5FD372B9F2E8300EE76C2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +67,7 @@
 		839167B52B9F262D00F7C98B /* Dependency */ = {
 			isa = PBXGroup;
 			children = (
+				83687F512B9F7C0A0070DDF9 /* ServiceRegistery.swift */,
 				839167B62B9F262D00F7C98B /* AppDelegate.swift */,
 				839167B82B9F262D00F7C98B /* SceneDelegate.swift */,
 				839167BA2B9F262D00F7C98B /* ViewController.swift */,
@@ -67,6 +79,13 @@
 			path = Dependency;
 			sourceTree = "<group>";
 		};
+		92D5FD372B9F2E8300EE76C2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,6 +93,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 839167C72B9F262E00F7C98B /* Build configuration list for PBXNativeTarget "Dependency" */;
 			buildPhases = (
+				837385D72B9F842F00EB2946 /* Register Services */,
 				839167AF2B9F262D00F7C98B /* Sources */,
 				839167B02B9F262D00F7C98B /* Frameworks */,
 				839167B12B9F262D00F7C98B /* Resources */,
@@ -83,6 +103,12 @@
 			dependencies = (
 			);
 			name = Dependency;
+			packageProductDependencies = (
+				839167CB2B9F267D00F7C98B /* MyLibrary */,
+				837385D52B9F7F9E00EB2946 /* MyLib_Wiring */,
+				837385DC2B9FA07700EB2946 /* CoreLibrary */,
+				83E35C4A2B9FA102008EB138 /* CoreLibrary_Wiring */,
+			);
 			productName = Dependency;
 			productReference = 839167B32B9F262D00F7C98B /* Dependency.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +137,10 @@
 				Base,
 			);
 			mainGroup = 839167AA2B9F262D00F7C98B;
+			packageReferences = (
+				92F132122B9F28C90056C002 /* XCLocalSwiftPackageReference "MyLibrary" */,
+				837385D92B9F9C1D00EB2946 /* XCLocalSwiftPackageReference "CoreLibrary" */,
+			);
 			productRefGroup = 839167B42B9F262D00F7C98B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -133,11 +163,34 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		837385D72B9F842F00EB2946 /* Register Services */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Register Services";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "echo \"import Factory\" > $SRCROOT/Dependency/ServiceRegistery.swift\ngrep --exclude-dir=Dependency.xcodeproj -rno $SRCROOT -e \"var \\(.*\\): Factory<\\(.*\\)>\" | sed -E \"s/^(.*)var (.*): Factory<(.*)>/import \\3_Wiring/g\" >> $SRCROOT/Dependency/ServiceRegistery.swift\necho \"\" >> $SRCROOT/Dependency/ServiceRegistery.swift\necho \"func registerDependencies() {\" >> ./Dependency/ServiceRegistery.swift\ngrep --exclude-dir=Dependency.xcodeproj -rno $SRCROOT -e \"var \\(.*\\): Factory<\\(.*\\)>\" | sed -E \"s/^(.*)var (.*): Factory<(.*)>/    Container.shared.\\2.register { \\3_Wiring.build() }/g\" >> ./Dependency/ServiceRegistery.swift\necho } >> ./Dependency/ServiceRegistery.swift\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		839167AF2B9F262D00F7C98B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83687F522B9F7C0A0070DDF9 /* ServiceRegistery.swift in Sources */,
 				839167BB2B9F262D00F7C98B /* ViewController.swift in Sources */,
 				839167B72B9F262D00F7C98B /* AppDelegate.swift in Sources */,
 				839167B92B9F262D00F7C98B /* SceneDelegate.swift in Sources */,
@@ -293,6 +346,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z5GH44G8KH;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dependency/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -300,6 +354,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -321,6 +376,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z5GH44G8KH;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dependency/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -328,6 +384,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -363,6 +420,39 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		837385D92B9F9C1D00EB2946 /* XCLocalSwiftPackageReference "CoreLibrary" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = CoreLibrary;
+		};
+		92F132122B9F28C90056C002 /* XCLocalSwiftPackageReference "MyLibrary" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = MyLibrary;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		837385D52B9F7F9E00EB2946 /* MyLib_Wiring */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 92F132122B9F28C90056C002 /* XCLocalSwiftPackageReference "MyLibrary" */;
+			productName = MyLib_Wiring;
+		};
+		837385DC2B9FA07700EB2946 /* CoreLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 837385D92B9F9C1D00EB2946 /* XCLocalSwiftPackageReference "CoreLibrary" */;
+			productName = CoreLibrary;
+		};
+		839167CB2B9F267D00F7C98B /* MyLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MyLibrary;
+		};
+		83E35C4A2B9FA102008EB138 /* CoreLibrary_Wiring */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 837385D92B9F9C1D00EB2946 /* XCLocalSwiftPackageReference "CoreLibrary" */;
+			productName = CoreLibrary_Wiring;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 839167AB2B9F262D00F7C98B /* Project object */;
 }
