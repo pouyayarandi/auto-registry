@@ -36,6 +36,7 @@ struct AutoRegistery: CommandPlugin {
         
             }
         }
+
         """
         
         try file.write(toFile: serviceRegisteryFile, atomically: true, encoding: .utf8)
