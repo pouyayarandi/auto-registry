@@ -7,6 +7,7 @@
 
 import UIKit
 import Factory
+import Registery
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
