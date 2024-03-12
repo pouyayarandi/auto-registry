@@ -11,7 +11,7 @@ import MyLibrary
 
 class ViewController: UIViewController {
 
-    @Injected(\.myLib) var myLib
+    @Injected(\.MyLib) var myLib
 
     override func viewDidLoad() {
         super.viewDidLoad()

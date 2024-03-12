@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "CoreLibrary",
+    platforms: [.iOS(.v13)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
@@ -19,20 +20,20 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/hmlongco/Factory.git", from: "2.3.1"),
-        .package(path: "../MyLibrary")
+        .package(path: "../ServiceMacro"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "CoreLibrary",
-            dependencies: ["Factory"]),
+            dependencies: ["Factory", "ServiceMacro"]),
         .target(
             name: "CoreLibrary_Imp",
-            dependencies: ["CoreLibrary", "MyLibrary"]),
+            dependencies: ["CoreLibrary"]),
         .target(
             name: "CoreLibrary_Wiring",
-            dependencies: ["CoreLibrary", "CoreLibrary_Imp", "Factory"]),
+            dependencies: ["CoreLibrary", "CoreLibrary_Imp"]),
         .testTarget(
             name: "CoreLibraryTests",
             dependencies: ["CoreLibrary"]),

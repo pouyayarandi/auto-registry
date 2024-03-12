@@ -2,11 +2,11 @@
 // https://docs.swift.org/swift-book
 
 import Factory
-
-public extension Container {
-    public var coreLibrary: Factory<CoreLibrary> { self { fatalError() } }
-}
+import ServiceMacro
 
 public protocol CoreLibrary {
     func text() -> String
 }
+
+@ServiceAPI("CoreLibrary")
+extension Container {}

@@ -4,7 +4,7 @@ import CoreLibrary_Wiring
 
 extension Container {
     func registerDependencies() {
-        myLib.register(factory: MyLib_Wiring.build)
-        coreLibrary.register(factory: CoreLibrary_Wiring.build)
+        MyLib.register(factory: MyLib_Wiring.build)
+        CoreLibrary.register(factory: CoreLibrary_Wiring.build)
     }
 }
