@@ -7,41 +7,43 @@ struct AutoRegistery: CommandPlugin {
     fileprivate func registerServices(_ grep: String, _ excluded: String, _ root: String, _ serviceRegisteryFile: String) throws {
         let task = Process()
         let pipe = Pipe()
-        
+
         task.standardOutput = pipe
         task.standardError = pipe
         task.launchPath = grep
         task.arguments = ["--exclude-dir=\(excluded)", "-rhno", root, "-e", "^@ServiceAPI\\((.*)\\)"]
         try task.run()
-        
+
         let data = pipe.fileHandleForReading.readDataToEndOfFile()
         let output = String(data: data, encoding: .utf8)!
-        
+
         let services = output.components(separatedBy: "\n")
             .compactMap({ $0.components(separatedBy: ":").last })
             .filter({ !$0.isEmpty })
             .map({ $0.replacingOccurrences(of: "@ServiceAPI(\"", with: "") })
             .map({ $0.replacingOccurrences(of: "\")", with: "") })
-        
+
         var file = """
         // AUTO-GENERATED, Please don't change this file manually
+
         import Factory
         \(services.map({ "import \($0)_Wiring" }).joined(separator: "\n"))
+
         extension Container {
-            public func registerDependencies() {
-        
+          public func registerDependencies() {
+
         """
-        file += services.map({ "        \($0).register(factory: \($0)_Wiring.build)" }).joined(separator: "\n")
+        file += services.map({ "    \($0).register(factory: \($0)_Wiring.build)" }).joined(separator: "\n")
         file += """
-        
-            }
+
+          }
         }
 
         """
-        
+
         try file.write(toFile: serviceRegisteryFile, atomically: true, encoding: .utf8)
     }
-    
+
     func performCommand(context: PackagePlugin.PluginContext, arguments: [String]) async throws {
         let grep = try context.tool(named: "grep").path.string
 
