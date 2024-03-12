@@ -2,7 +2,9 @@ import Factory
 import MyLib_Wiring
 import CoreLibrary_Wiring
 
-func registerDependencies() {
-    Container.shared.myLib.register { MyLib_Wiring.build() }
-    Container.shared.core.register { CoreLibrary_Wiring.build() }
+extension Container {
+    func registerDependencies() {
+        myLib.register(factory: MyLib_Wiring.build)
+        coreLibrary.register(factory: CoreLibrary_Wiring.build)
+    }
 }

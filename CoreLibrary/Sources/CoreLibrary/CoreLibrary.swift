@@ -4,7 +4,7 @@
 import Factory
 
 public extension Container {
-    public var core: Factory<CoreLibrary> { self { fatalError() } }
+    public var coreLibrary: Factory<CoreLibrary> { self { fatalError() } }
 }
 
 public protocol CoreLibrary {

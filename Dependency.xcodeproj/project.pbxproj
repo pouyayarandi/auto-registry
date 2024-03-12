@@ -181,7 +181,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "echo \"import Factory\" > $SRCROOT/Dependency/ServiceRegistery.swift\ngrep --exclude-dir=Dependency.xcodeproj -rno $SRCROOT -e \"var \\(.*\\): Factory<\\(.*\\)>\" | sed -E \"s/^(.*)var (.*): Factory<(.*)>/import \\3_Wiring/g\" >> $SRCROOT/Dependency/ServiceRegistery.swift\necho \"\" >> $SRCROOT/Dependency/ServiceRegistery.swift\necho \"func registerDependencies() {\" >> ./Dependency/ServiceRegistery.swift\ngrep --exclude-dir=Dependency.xcodeproj -rno $SRCROOT -e \"var \\(.*\\): Factory<\\(.*\\)>\" | sed -E \"s/^(.*)var (.*): Factory<(.*)>/    Container.shared.\\2.register { \\3_Wiring.build() }/g\" >> ./Dependency/ServiceRegistery.swift\necho } >> ./Dependency/ServiceRegistery.swift\n";
+			shellScript = "echo \"import Factory\" > $SRCROOT/Dependency/ServiceRegistery.swift\ngrep --exclude-dir=Dependency.xcodeproj -rno $SRCROOT -e \"var \\(.*\\): Factory<\\(.*\\)>\" | sed -E \"s/^(.*)var (.*): Factory<(.*)>/import \\3_Wiring/g\" >> $SRCROOT/Dependency/ServiceRegistery.swift\necho \"\" >> $SRCROOT/Dependency/ServiceRegistery.swift\necho \"extension Container {\" >> $SRCROOT/Dependency/ServiceRegistery.swift\necho \"    func registerDependencies() {\" >> ./Dependency/ServiceRegistery.swift\ngrep --exclude-dir=Dependency.xcodeproj -rno $SRCROOT -e \"var \\(.*\\): Factory<\\(.*\\)>\" | sed -E \"s/^(.*)var (.*): Factory<(.*)>/        \\2.register(factory: \\3_Wiring.build)/g\" >> ./Dependency/ServiceRegistery.swift\necho \"    }\" >> ./Dependency/ServiceRegistery.swift\necho \"}\" >> ./Dependency/ServiceRegistery.swift\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

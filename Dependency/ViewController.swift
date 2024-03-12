@@ -7,6 +7,7 @@
 
 import UIKit
 import Factory
+import MyLibrary
 
 class ViewController: UIViewController {
 
