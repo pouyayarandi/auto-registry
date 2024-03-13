@@ -1,9 +1,9 @@
 import ServiceMacro
 import Factory
 
-protocol Network {}
+protocol NetworkService {}
 
-//@Service(Network.self)
+//@Service(NetworkService.self)
 extension Container {}
 
 

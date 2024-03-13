@@ -10,8 +10,15 @@ public struct ServiceAPIMacro: MemberMacro {
             fatalError("Arguments are not correct")
         }
         return [
-            "public var \(raw: arg): Factory<\(raw: arg)> { self { fatalError() } }",
+            "public var \(raw: arg.camelcased()): Factory<\(raw: arg)> { self { fatalError() } }",
         ]
+    }
+}
+
+extension String {
+    func camelcased() -> String {
+        guard !isEmpty else { return self }
+        return first!.lowercased() + self.dropFirst()
     }
 }
 

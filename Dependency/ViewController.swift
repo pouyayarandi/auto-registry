@@ -10,7 +10,7 @@ import Factory
 
 class ViewController: UIViewController {
 
-    @Injected(\.DomainLibrary) var domain
+    @Injected(\.domainLibrary) var domain
 
     override func viewDidLoad() {
         super.viewDidLoad()

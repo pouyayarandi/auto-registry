@@ -10,7 +10,7 @@ import CoreLibrary_Wiring
 
 extension Container {
   public func registerDependencies() {
-    DomainLibrary.register(factory: DomainLibrary_Wiring.build)
-    CoreLibrary.register(factory: CoreLibrary_Wiring.build)
+    domainLibrary.register(factory: DomainLibrary_Wiring.build)
+    coreLibrary.register(factory: CoreLibrary_Wiring.build)
   }
 }

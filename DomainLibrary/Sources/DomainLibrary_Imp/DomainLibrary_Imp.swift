@@ -14,7 +14,7 @@ public struct DomainLibrary_Imp: DomainLibrary {
 
     public init() {}
 
-    @Injected(\.CoreLibrary) var core
+    @Injected(\.coreLibrary) var core
 
     public func doSomething() {
         print(core.text())

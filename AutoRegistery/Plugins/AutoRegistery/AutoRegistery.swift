@@ -64,7 +64,7 @@ private func registerServices(_ grep: String, _ excluded: String, _ root: String
       public func registerDependencies() {
 
     """
-    file += services.map({ "    \($0).register(factory: \($0)_Wiring.build)" }).joined(separator: "\n")
+    file += services.map({ "    \($0.camelcased()).register(factory: \($0)_Wiring.build)" }).joined(separator: "\n")
     file += """
 
       }
@@ -88,5 +88,10 @@ extension HashFunction {
 extension String {
     var sha256: String {
         SHA256.hash(self)
+    }
+
+    func camelcased() -> String {
+        guard !isEmpty else { return self }
+        return first!.lowercased() + self.dropFirst()
     }
 }
