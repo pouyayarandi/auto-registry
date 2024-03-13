@@ -34,7 +34,7 @@ private func checkServices(_ grep: String, _ excluded: String, _ root: String, _
     task.standardOutput = pipe
     task.standardError = pipe
     task.launchPath = grep
-    task.arguments = ["--exclude-dir=\(excluded)", "-rhno", root, "-e", "^@ServiceAPI\\((.*)\\)"]
+    task.arguments = ["--exclude-dir=\(excluded)", "-rhno", root, "-e", "^@Service\\((.*)\\)"]
     try task.run()
 
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
@@ -43,7 +43,7 @@ private func checkServices(_ grep: String, _ excluded: String, _ root: String, _
     let services = output.components(separatedBy: "\n")
         .compactMap({ $0.components(separatedBy: ":").last })
         .filter({ !$0.isEmpty })
-        .map({ $0.replacingOccurrences(of: "@ServiceAPI(\"", with: "") })
+        .map({ $0.replacingOccurrences(of: "@Service(\"", with: "") })
         .map({ $0.replacingOccurrences(of: "\")", with: "") })
 
     guard

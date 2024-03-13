@@ -3,7 +3,7 @@ import Factory
 
 protocol Network {}
 
-//@ServiceAPI("Network")
+//@Service("Network")
 extension Container {}
 
 

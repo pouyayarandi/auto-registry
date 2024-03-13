@@ -12,7 +12,7 @@ struct AutoRegistery: CommandPlugin {
         task.standardOutput = pipe
         task.standardError = pipe
         task.launchPath = grep
-        task.arguments = ["--exclude-dir=\(excluded)", "-rhno", root, "-e", "^@ServiceAPI\\((.*)\\)"]
+        task.arguments = ["--exclude-dir=\(excluded)", "-rhno", root, "-e", "^@Service\\((.*)\\)"]
         try task.run()
 
         let data = pipe.fileHandleForReading.readDataToEndOfFile()
@@ -21,7 +21,7 @@ struct AutoRegistery: CommandPlugin {
         let services = output.components(separatedBy: "\n")
             .compactMap({ $0.components(separatedBy: ":").last })
             .filter({ !$0.isEmpty })
-            .map({ $0.replacingOccurrences(of: "@ServiceAPI(\"", with: "") })
+            .map({ $0.replacingOccurrences(of: "@Service(\"", with: "") })
             .map({ $0.replacingOccurrences(of: "\")", with: "") })
 
         var file = """
