@@ -1,5 +1,6 @@
 import PackagePlugin
 import Foundation
+import CryptoKit
 
 @main
 struct AutoRegistery: CommandPlugin {
@@ -24,7 +25,11 @@ struct AutoRegistery: CommandPlugin {
             .map({ $0.replacingOccurrences(of: "\")", with: "") })
 
         var file = """
+        // hash_\(services.joined(separator: ",").sha256)
+        //
         // AUTO-GENERATED, Please don't change this file manually
+        // If you want to regenerate this file, run AutoRegistery
+        // command plugin.
 
         import Factory
         \(services.map({ "import \($0)_Wiring" }).joined(separator: "\n"))
@@ -70,3 +75,19 @@ extension AutoRegistery: XcodeCommandPlugin {
     }
 }
 #endif
+
+extension SHA256 {
+    static func hash(_ string: String) -> String {
+        let data = string.data(using: .utf8)!
+        let hashedData = Self.hash(data: data)
+        return hashedData
+            .compactMap({ String(format: "%02x", $0) })
+            .joined()
+    }
+}
+
+extension String {
+    var sha256: String {
+        SHA256.hash(self)
+    }
+}

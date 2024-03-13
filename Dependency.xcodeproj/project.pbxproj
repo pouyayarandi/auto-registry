@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		832FB6692BA03F3200589DE3 /* ServiceMacro in Frameworks */ = {isa = PBXBuildFile; productRef = 832FB6682BA03F3200589DE3 /* ServiceMacro */; };
-		837385DD2B9FA07700EB2946 /* CoreLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 837385DC2B9FA07700EB2946 /* CoreLibrary */; };
 		839167B72B9F262D00F7C98B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839167B62B9F262D00F7C98B /* AppDelegate.swift */; };
 		839167B92B9F262D00F7C98B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839167B82B9F262D00F7C98B /* SceneDelegate.swift */; };
 		839167BB2B9F262D00F7C98B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839167BA2B9F262D00F7C98B /* ViewController.swift */; };
@@ -35,8 +33,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				837385DD2B9FA07700EB2946 /* CoreLibrary in Frameworks */,
-				832FB6692BA03F3200589DE3 /* ServiceMacro in Frameworks */,
 				839167CC2B9F267D00F7C98B /* MyLibrary in Frameworks */,
 				83F5935B2BA0D2970054C35F /* Registery in Frameworks */,
 			);
@@ -90,7 +86,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 839167C72B9F262E00F7C98B /* Build configuration list for PBXNativeTarget "Dependency" */;
 			buildPhases = (
-				837385D72B9F842F00EB2946 /* Register Services */,
 				839167AF2B9F262D00F7C98B /* Sources */,
 				839167B02B9F262D00F7C98B /* Frameworks */,
 				839167B12B9F262D00F7C98B /* Resources */,
@@ -98,12 +93,11 @@
 			buildRules = (
 			);
 			dependencies = (
+				833CBC972BA19A1A00F95E69 /* PBXTargetDependency */,
 			);
 			name = Dependency;
 			packageProductDependencies = (
 				839167CB2B9F267D00F7C98B /* MyLibrary */,
-				837385DC2B9FA07700EB2946 /* CoreLibrary */,
-				832FB6682BA03F3200589DE3 /* ServiceMacro */,
 				83F5935A2BA0D2970054C35F /* Registery */,
 			);
 			productName = Dependency;
@@ -162,29 +156,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		837385D72B9F842F00EB2946 /* Register Services */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Register Services";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "
-";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		839167AF2B9F262D00F7C98B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -197,6 +168,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		833CBC972BA19A1A00F95E69 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 833CBC962BA19A1A00F95E69 /* RegisteryChecker */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		839167BC2B9F262D00F7C98B /* Main.storyboard */ = {
@@ -440,14 +418,10 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		832FB6682BA03F3200589DE3 /* ServiceMacro */ = {
+		833CBC962BA19A1A00F95E69 /* RegisteryChecker */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = ServiceMacro;
-		};
-		837385DC2B9FA07700EB2946 /* CoreLibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 837385D92B9F9C1D00EB2946 /* XCLocalSwiftPackageReference "CoreLibrary" */;
-			productName = CoreLibrary;
+			package = 837684B32BA07920002EA6C6 /* XCLocalSwiftPackageReference "AutoRegistery" */;
+			productName = "plugin:RegisteryChecker";
 		};
 		839167CB2B9F267D00F7C98B /* MyLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
