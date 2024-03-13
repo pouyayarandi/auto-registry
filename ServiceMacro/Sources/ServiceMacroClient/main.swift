@@ -3,10 +3,10 @@ import Factory
 
 protocol Network {}
 
-//@Service("Network")
+//@Service(Network.self)
 extension Container {}
 
 
 //struct MyService {
-//    @Injected(\.network) var network
+//    @Injected(\.Network) var network
 //}

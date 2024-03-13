@@ -28,9 +28,13 @@ let package = Package(
         .plugin(
             name: "AutoRegistery",
             capability: .command(
-                intent: .custom(verb: "register-services", description: ""),
+                intent: .custom(verb: "generate-registery", description: ""),
                 permissions: [
-                    .writeToPackageDirectory(reason: "")
+                    .writeToPackageDirectory(
+                        reason: """
+                        In order to generate registery file it
+                        will be needed to have write permission
+                        """)
                 ])
         ),
         .plugin(

@@ -8,5 +8,5 @@ public protocol CoreLibrary {
     func text() -> String
 }
 
-@Service("CoreLibrary")
+@Service(CoreLibrary.self)
 extension Container {}

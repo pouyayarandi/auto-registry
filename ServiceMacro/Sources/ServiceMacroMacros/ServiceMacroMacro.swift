@@ -5,8 +5,8 @@ import SwiftSyntaxMacros
 
 public struct ServiceAPIMacro: MemberMacro {
     public static func expansion(of node: AttributeSyntax, providingMembersOf declaration: some DeclGroupSyntax, in context: some MacroExpansionContext) throws -> [DeclSyntax] {
-        guard case .argumentList(let args) = node.arguments, 
-                let arg = args.first?.expression.description.replacingOccurrences(of: "\"", with: "") else {
+        guard case .argumentList(let args) = node.arguments,
+                let arg = args.first?.expression.description.replacingOccurrences(of: ".self", with: "") else {
             fatalError("Arguments are not correct")
         }
         return [

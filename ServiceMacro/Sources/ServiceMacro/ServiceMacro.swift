@@ -2,4 +2,4 @@
 // https://docs.swift.org/swift-book
 
 @attached(member, names: arbitrary)
-public macro Service(_: String) = #externalMacro(module: "ServiceMacroMacros", type: "ServiceAPIMacro")
+public macro Service(_: Any) = #externalMacro(module: "ServiceMacroMacros", type: "ServiceAPIMacro")

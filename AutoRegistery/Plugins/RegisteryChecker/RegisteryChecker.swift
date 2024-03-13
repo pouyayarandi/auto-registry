@@ -43,8 +43,8 @@ private func checkServices(_ grep: String, _ excluded: String, _ root: String, _
     let services = output.components(separatedBy: "\n")
         .compactMap({ $0.components(separatedBy: ":").last })
         .filter({ !$0.isEmpty })
-        .map({ $0.replacingOccurrences(of: "@Service(\"", with: "") })
-        .map({ $0.replacingOccurrences(of: "\")", with: "") })
+        .map({ $0.replacingOccurrences(of: "@Service(", with: "") })
+        .map({ $0.replacingOccurrences(of: ".self)", with: "") })
 
     guard
         let data = FileManager.default.contents(atPath: serviceRegisteryFile),
@@ -59,7 +59,7 @@ private func checkServices(_ grep: String, _ excluded: String, _ root: String, _
     }
 }
 
-extension SHA256 {
+extension HashFunction {
     static func hash(_ string: String) -> String {
         let data = string.data(using: .utf8)!
         let hashedData = Self.hash(data: data)
