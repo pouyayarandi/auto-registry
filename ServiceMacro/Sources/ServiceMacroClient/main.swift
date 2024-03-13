@@ -8,5 +8,5 @@ extension Container {}
 
 
 //struct MyService {
-//    @Injected(\.Network) var network
+//    @Injected(\.networkService) var network
 //}

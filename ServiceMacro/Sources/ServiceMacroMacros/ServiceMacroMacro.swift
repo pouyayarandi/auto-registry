@@ -5,12 +5,15 @@ import SwiftSyntaxMacros
 
 public struct ServiceAPIMacro: MemberMacro {
     public static func expansion(of node: AttributeSyntax, providingMembersOf declaration: some DeclGroupSyntax, in context: some MacroExpansionContext) throws -> [DeclSyntax] {
-        guard case .argumentList(let args) = node.arguments,
-                let arg = args.first?.expression.description.replacingOccurrences(of: ".self", with: "") else {
-            fatalError("Arguments are not correct")
+        if node.description.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "") != node.description.trimmingCharacters(in: .whitespacesAndNewlines) {
+            fatalError("Use no whitespace in @Service argument")
         }
+        guard case .argumentList(let args) = node.arguments, let arg = args.first else {
+            fatalError("Argument is not valid")
+        }
+        let name = arg.description.replacingOccurrences(of: ".self", with: "")
         return [
-            "public var \(raw: arg.camelcased()): Factory<\(raw: arg)> { self { fatalError() } }",
+            "public var \(raw: name.camelcased()): Factory<\(raw: name)> { self { fatalError() } }",
         ]
     }
 }
