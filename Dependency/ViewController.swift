@@ -7,15 +7,14 @@
 
 import UIKit
 import Factory
-import MyLibrary
 
 class ViewController: UIViewController {
 
-    @Injected(\.MyLib) var myLib
+    @Injected(\.DomainLibrary) var domain
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        myLib.print()
+        domain.doSomething()
     }
 
 }

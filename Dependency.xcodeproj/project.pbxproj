@@ -13,7 +13,6 @@
 		839167BE2B9F262D00F7C98B /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 839167BD2B9F262D00F7C98B /* Base */; };
 		839167C02B9F262E00F7C98B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 839167BF2B9F262E00F7C98B /* Assets.xcassets */; };
 		839167C32B9F262E00F7C98B /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 839167C22B9F262E00F7C98B /* Base */; };
-		839167CC2B9F267D00F7C98B /* MyLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 839167CB2B9F267D00F7C98B /* MyLibrary */; };
 		83F5935B2BA0D2970054C35F /* Registery in Frameworks */ = {isa = PBXBuildFile; productRef = 83F5935A2BA0D2970054C35F /* Registery */; };
 /* End PBXBuildFile section */
 
@@ -33,7 +32,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				839167CC2B9F267D00F7C98B /* MyLibrary in Frameworks */,
 				83F5935B2BA0D2970054C35F /* Registery in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -97,7 +95,6 @@
 			);
 			name = Dependency;
 			packageProductDependencies = (
-				839167CB2B9F267D00F7C98B /* MyLibrary */,
 				83F5935A2BA0D2970054C35F /* Registery */,
 			);
 			productName = Dependency;
@@ -129,10 +126,9 @@
 			);
 			mainGroup = 839167AA2B9F262D00F7C98B;
 			packageReferences = (
-				92F132122B9F28C90056C002 /* XCLocalSwiftPackageReference "MyLibrary" */,
-				837385D92B9F9C1D00EB2946 /* XCLocalSwiftPackageReference "CoreLibrary" */,
 				832FB6672BA03F3200589DE3 /* XCLocalSwiftPackageReference "ServiceMacro" */,
 				837684B32BA07920002EA6C6 /* XCLocalSwiftPackageReference "AutoRegistery" */,
+				835ED3A72BA1C3E500283C97 /* XCLocalSwiftPackageReference "DomainLibrary" */,
 			);
 			productRefGroup = 839167B42B9F262D00F7C98B /* Products */;
 			projectDirPath = "";
@@ -403,17 +399,13 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ServiceMacro;
 		};
-		837385D92B9F9C1D00EB2946 /* XCLocalSwiftPackageReference "CoreLibrary" */ = {
+		835ED3A72BA1C3E500283C97 /* XCLocalSwiftPackageReference "DomainLibrary" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = CoreLibrary;
+			relativePath = DomainLibrary;
 		};
 		837684B32BA07920002EA6C6 /* XCLocalSwiftPackageReference "AutoRegistery" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = AutoRegistery;
-		};
-		92F132122B9F28C90056C002 /* XCLocalSwiftPackageReference "MyLibrary" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = MyLibrary;
 		};
 /* End XCLocalSwiftPackageReference section */
 
@@ -422,10 +414,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 837684B32BA07920002EA6C6 /* XCLocalSwiftPackageReference "AutoRegistery" */;
 			productName = "plugin:RegisteryChecker";
-		};
-		839167CB2B9F267D00F7C98B /* MyLibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = MyLibrary;
 		};
 		83F5935A2BA0D2970054C35F /* Registery */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -19,8 +19,8 @@ let package = Package(
             targets: ["Registery"])
     ],
     dependencies: [
-        .package(path: "../MyLibrary"),
         .package(path: "../CoreLibrary"),
+        .package(path: "../DomainLibrary"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -44,8 +44,8 @@ let package = Package(
         .target(
             name: "Registery",
             dependencies: [
-                .product(name: "MyLib_Wiring", package: "MyLibrary"),
                 .product(name: "CoreLibrary_Wiring", package: "CoreLibrary"),
+                .product(name: "DomainLibrary_Wiring", package: "DomainLibrary"),
             ]
         )
     ]
