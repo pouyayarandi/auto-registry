@@ -1,6 +1,7 @@
 # AutoRegistry
 
-This project is a demo to show how we can make `Factory` safer with the help of code generators.
+This project is a demo to show how we can make `Factory` safer with the help of code generators. 
+In this project we have a DomainLibrary which is using CoreLibrary inside its implementation and it's being used in the project.
 
 ## How does it work?
 
