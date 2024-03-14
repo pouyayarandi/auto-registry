@@ -86,5 +86,9 @@ Just add it to the dependencies of Registery target in AutoRegistery's Package.s
 )
 ```
 
-And now your project works!
+And now your project works! You can use the new service everywhere with Factory's Container.
+
+```swift
+@Injected(\.myService) var myService
+```
 
