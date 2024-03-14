@@ -31,7 +31,7 @@ public protocol MyService {
 }
 
 @Service(MyService.self)
-extension Container
+extension Container {}
 ```
 
 ### 3. Implement your service
