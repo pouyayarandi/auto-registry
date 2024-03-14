@@ -76,5 +76,15 @@ swift package generate-registery
 Your project still fails as generated code imports `MyService_Wiring`. 
 Just add it to the dependencies of Registery target in AutoRegistery's Package.swift file.
 
+```swift
+.target(
+  name: "Registery",
+  dependencies: [
+    .product(name: "MyService_Wiring", package: "MyService"),
+    ...
+  ]
+)
+```
+
 And now your project works!
 
