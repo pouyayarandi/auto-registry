@@ -38,7 +38,7 @@ private func registerServices(_ grep: String, _ excluded: String, _ root: String
     task.standardOutput = pipe
     task.standardError = pipe
     task.launchPath = grep
-    task.arguments = ["--exclude-dir=\(excluded)", "-rhno", root, "-e", "^@Service\\((.*)\\)"]
+    task.arguments = ["--exclude-dir=\(excluded)", "--exclude=README.md", "-rhno", root, "-e", "^@Service\\((.*)\\)"]
     try task.run()
 
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
@@ -58,13 +58,13 @@ private func registerServices(_ grep: String, _ excluded: String, _ root: String
     // command plugin.
 
     import Factory
-    \(services.map({ "import \($0)_Wiring" }).joined(separator: "\n"))
+    \(services.map({ "import \($0)_Imp" }).joined(separator: "\n"))
 
-    extension Container {
-      public func registerDependencies() {
+    public struct Registry {
+      public static func registerServices() {
 
     """
-    file += services.map({ "    \($0.camelcased()).register(factory: \($0)_Wiring.build)" }).joined(separator: "\n")
+    file += services.map({ "    \($0)_Imp_Registry.register()" }).joined(separator: "\n")
     file += """
 
       }

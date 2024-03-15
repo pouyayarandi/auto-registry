@@ -1,12 +1,21 @@
-import ServiceMacro
-import Factory
-
-protocol NetworkService {}
-
+//import ServiceMacro
+//import Factory
+//
 //@Service(NetworkService.self)
-extension Container {}
-
-
-//struct MyService {
-//    @Injected(\.networkService) var network
+//public protocol NetworkService {
+//    func test()
 //}
+//
+//
+//struct MyService {
+//    @Injected(\NetworkService_Container.networkService) var network
+//}
+//
+//@Implementation(NetworkService.self)
+//struct NetworkServiceImp: NetworkService {
+//    func test() {
+//
+//    }
+//}
+//
+//Registry.register()

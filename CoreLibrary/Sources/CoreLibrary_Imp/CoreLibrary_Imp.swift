@@ -7,8 +7,10 @@
 
 import Foundation
 import CoreLibrary
+import ServiceMacro
 
-public struct CoreLibraryImp: CoreLibrary {
+@Implementation(CoreLibrary.self)
+public struct CoreLibrary_Imp: CoreLibrary {
 
     public init() {}
 

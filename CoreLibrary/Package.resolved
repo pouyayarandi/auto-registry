@@ -1,5 +1,4 @@
 {
-  "originHash" : "4822722b4541d208755c2c3b6ccf4caedac12134048efadbcc51cb166e20b82a",
   "pins" : [
     {
       "identity" : "factory",
@@ -20,5 +19,5 @@
       }
     }
   ],
-  "version" : 3
+  "version" : 2
 }

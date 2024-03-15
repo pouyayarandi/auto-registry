@@ -44,8 +44,8 @@ let package = Package(
         .target(
             name: "Registery",
             dependencies: [
-                .product(name: "CoreLibrary_Wiring", package: "CoreLibrary"),
-                .product(name: "DomainLibrary_Wiring", package: "DomainLibrary"),
+                .product(name: "CoreLibrary_Imp", package: "CoreLibrary"),
+                .product(name: "DomainLibrary_Imp", package: "DomainLibrary"),
             ]
         )
     ]

@@ -9,12 +9,14 @@ import Foundation
 import DomainLibrary
 import Factory
 import CoreLibrary
+import ServiceMacro
 
+@Implementation(DomainLibrary.self)
 public struct DomainLibrary_Imp: DomainLibrary {
 
     public init() {}
 
-    @Injected(\.coreLibrary) var core
+    @Injected(\CoreLibrary_Container.coreLibrary) var core
 
     public func doSomething() {
         print(core.text())

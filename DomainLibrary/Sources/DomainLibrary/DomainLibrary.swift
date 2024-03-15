@@ -4,9 +4,7 @@
 import Factory
 import ServiceMacro
 
+@Service(DomainLibrary.self)
 public protocol DomainLibrary {
     func doSomething()
 }
-
-@Service(DomainLibrary.self)
-extension Container {}

@@ -14,9 +14,6 @@ let package = Package(
         .library(
             name: "DomainLibrary_Imp",
             targets: ["DomainLibrary_Imp"]),
-        .library(
-            name: "DomainLibrary_Wiring",
-            targets: ["DomainLibrary_Wiring"]),
     ],
     dependencies: [
         .package(url: "https://github.com/hmlongco/Factory.git", from: "2.3.1"),
@@ -31,10 +28,7 @@ let package = Package(
             dependencies: ["Factory", "ServiceMacro"]),
         .target(
             name: "DomainLibrary_Imp",
-            dependencies: ["DomainLibrary", "Factory", "CoreLibrary"]),
-        .target(
-            name: "DomainLibrary_Wiring",
-            dependencies: ["DomainLibrary", "DomainLibrary_Imp"]),
+            dependencies: ["DomainLibrary", "Factory", "CoreLibrary", "ServiceMacro"]),
         .testTarget(
             name: "DomainLibraryTests",
             dependencies: ["DomainLibrary"]),

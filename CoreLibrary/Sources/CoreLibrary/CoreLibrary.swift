@@ -4,9 +4,7 @@
 import Factory
 import ServiceMacro
 
+@Service(CoreLibrary.self)
 public protocol CoreLibrary {
     func text() -> String
 }
-
-@Service(CoreLibrary.self)
-extension Container {}

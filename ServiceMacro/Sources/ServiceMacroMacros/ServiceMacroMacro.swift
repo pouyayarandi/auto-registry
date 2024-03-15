@@ -3,18 +3,60 @@ import SwiftSyntax
 import SwiftSyntaxBuilder
 import SwiftSyntaxMacros
 
-public struct ServiceAPIMacro: MemberMacro {
-    public static func expansion(of node: AttributeSyntax, providingMembersOf declaration: some DeclGroupSyntax, in context: some MacroExpansionContext) throws -> [DeclSyntax] {
+struct BuildError: Error, CustomStringConvertible {
+    let message: String
+    var description: String { message }
+}
+
+public struct ServiceAPIMacro: PeerMacro {
+    public static func expansion(of node: SwiftSyntax.AttributeSyntax, providingPeersOf declaration: some SwiftSyntax.DeclSyntaxProtocol, in context: some SwiftSyntaxMacros.MacroExpansionContext) throws -> [SwiftSyntax.DeclSyntax] {
         if node.description.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "") != node.description.trimmingCharacters(in: .whitespacesAndNewlines) {
-            fatalError("Use no whitespace in @Service argument")
+            throw BuildError(message: "Use no whitespace in @Service argument")
         }
         guard case .argumentList(let args) = node.arguments, let arg = args.first else {
-            fatalError("Argument is not valid")
+            throw BuildError(message: "Some arguments may be invalid")
         }
-        let name = arg.description.replacingOccurrences(of: ".self", with: "")
-        return [
-            "public var \(raw: name.camelcased()): Factory<\(raw: name)> { self { fatalError() } }",
-        ]
+        let apiName = arg.description.replacingOccurrences(of: ".self", with: "")
+        guard let proto = declaration.as(ProtocolDeclSyntax.self) else {
+            throw BuildError(message: "Service must be protocol")
+        }
+        let name = proto.name.trimmed
+        guard apiName == name.text else {
+            throw BuildError(message: "Name should be the same of the protocol")
+        }
+        return ["""
+                final public class \(raw: name)_Container: SharedContainer {
+                    public var manager: ContainerManager = .init()
+                    public static var shared: \(raw: name)_Container = .init()
+                    public var \(raw: name.text.camelcased()): Factory<\(raw: name)> {
+                        self { fatalError() }
+                    }
+                }
+                """]
+    }
+}
+
+public struct ServiceImplementationMacro: PeerMacro {
+    public static func expansion(of node: SwiftSyntax.AttributeSyntax, providingPeersOf declaration: some SwiftSyntax.DeclSyntaxProtocol, in context: some SwiftSyntaxMacros.MacroExpansionContext) throws -> [SwiftSyntax.DeclSyntax] {
+        guard case .argumentList(let args) = node.arguments, let arg = args.first else {
+            throw BuildError(message: "Some arguments may be invalid")
+        }
+        let apiName = arg.description.replacingOccurrences(of: ".self", with: "")
+        guard let impName = declaration.as(StructDeclSyntax.self)?.name ?? declaration.as(ClassDeclSyntax.self)?.name else {
+            throw BuildError(message: "Implementation must be either class or struct")
+        }
+        guard impName.text == "\(apiName)_Imp" else {
+            throw BuildError(message: "Implementation name should be <ServiceName>_Imp")
+        }
+        return ["""
+                public struct \(raw: impName)_Registry {
+                    public static func register(_ container: \(raw: apiName)_Container = .shared) {
+                        container.\(raw: apiName.camelcased()).register {
+                            \(raw: impName.trimmed)()
+                        }
+                    }
+                }
+                """]
     }
 }
 
@@ -29,5 +71,6 @@ extension String {
 struct ServiceMacroPlugin: CompilerPlugin {
     let providingMacros: [Macro.Type] = [
         ServiceAPIMacro.self,
+        ServiceImplementationMacro.self,
     ]
 }

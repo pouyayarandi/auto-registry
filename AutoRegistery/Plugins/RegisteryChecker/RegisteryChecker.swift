@@ -2,6 +2,11 @@ import PackagePlugin
 import Foundation
 import CryptoKit
 
+struct BuildError: Error, CustomStringConvertible {
+    let message: String
+    var description: String { message }
+}
+
 @main
 struct RegisteryChecker: BuildToolPlugin {
     func createBuildCommands(context: PackagePlugin.PluginContext, target: any PackagePlugin.Target) async throws -> [PackagePlugin.Command] {
@@ -34,7 +39,7 @@ private func checkServices(_ grep: String, _ excluded: String, _ root: String, _
     task.standardOutput = pipe
     task.standardError = pipe
     task.launchPath = grep
-    task.arguments = ["--exclude-dir=\(excluded)", "-rhno", root, "-e", "^@Service\\((.*)\\)"]
+    task.arguments = ["--exclude-dir=\(excluded)", "--exclude=README.md", "-rhno", root, "-e", "^@Service\\((.*)\\)"]
     try task.run()
 
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
@@ -49,13 +54,13 @@ private func checkServices(_ grep: String, _ excluded: String, _ root: String, _
     guard
         let data = FileManager.default.contents(atPath: serviceRegisteryFile),
         let content = String(data: data, encoding: .utf8) else {
-        fatalError("Could not find reference for services")
+        throw BuildError(message: "Could not find reference for services")
     }
 
     let hash = "// hash_\(services.joined(separator: ",").sha256)"
 
     if !content.hasPrefix(hash) {
-        fatalError("Registery file is outdated, please regenerate it using AutoRegistery command.")
+        throw BuildError(message: "Registery file is outdated, please regenerate it using AutoRegistery command.")
     }
 }
 

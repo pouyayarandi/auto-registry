@@ -5,12 +5,12 @@
 // command plugin.
 
 import Factory
-import DomainLibrary_Wiring
-import CoreLibrary_Wiring
+import DomainLibrary_Imp
+import CoreLibrary_Imp
 
-extension Container {
-  public func registerDependencies() {
-    domainLibrary.register(factory: DomainLibrary_Wiring.build)
-    coreLibrary.register(factory: CoreLibrary_Wiring.build)
+public struct Registry {
+  public static func registerServices() {
+    DomainLibrary_Imp_Registry.register()
+    CoreLibrary_Imp_Registry.register()
   }
 }

@@ -7,10 +7,11 @@
 
 import UIKit
 import Factory
+import DomainLibrary
 
 class ViewController: UIViewController {
 
-    @Injected(\.domainLibrary) var domain
+    @Injected(\DomainLibrary_Container.domainLibrary) var domain
 
     override func viewDidLoad() {
         super.viewDidLoad()
