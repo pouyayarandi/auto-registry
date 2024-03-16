@@ -24,7 +24,7 @@ Add a swift package for the service. We will use it in the next steps.
 ### 2. Add a public module
 
 Add a module for the public layer of the service. It contains protocols which will be available from the outside.
-Here you should add `@Service` to annotate the extension of the `Container`.
+Here you should add `@Service` to annotate the service protocol.
 
 ```swift
 @Service(MyService.self)
