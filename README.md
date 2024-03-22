@@ -11,7 +11,7 @@ It's rely on two tools: ServiceMacro and AutoRegistery.
   It generates a Factory's `Container` to define the service and a registry for the implementation.
 - **AutoRegistery:** a command plugin which generates the code for service registerations based on occurances of `@Service` through the codebase.
   It also provides a build tool plugin which compare hashes of file and desired state and fails the compile if the generated code is outdated.
-  The generated code could be found in `Registery.swift` file inside AutoRegistery package.
+  The generated code could be found in `Registry.generated.swift` file inside AutoRegistery package.
 
 ## How to add a service?
 
@@ -27,7 +27,7 @@ Add a module for the public layer of the service. It contains protocols which wi
 Here you should add `@Service` to annotate the service protocol.
 
 ```swift
-@Service(MyService.self)
+@Service
 public protocol MyService {
   func helloWorld()
 }

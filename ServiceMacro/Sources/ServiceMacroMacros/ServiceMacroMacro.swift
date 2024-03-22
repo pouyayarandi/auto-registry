@@ -13,17 +13,10 @@ public struct ServiceAPIMacro: PeerMacro {
         if node.description.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "") != node.description.trimmingCharacters(in: .whitespacesAndNewlines) {
             throw BuildError(message: "Use no whitespace in @Service argument")
         }
-        guard case .argumentList(let args) = node.arguments, let arg = args.first else {
-            throw BuildError(message: "Some arguments may be invalid")
-        }
-        let apiName = arg.description.replacingOccurrences(of: ".self", with: "")
         guard let proto = declaration.as(ProtocolDeclSyntax.self) else {
             throw BuildError(message: "Service must be protocol")
         }
         let name = proto.name.trimmed
-        guard apiName == name.text else {
-            throw BuildError(message: "Name should be the same of the protocol")
-        }
         return ["""
                 final public class \(raw: name)_Container: SharedContainer {
                     public var manager: ContainerManager = .init()

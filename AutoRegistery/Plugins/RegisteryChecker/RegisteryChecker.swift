@@ -7,10 +7,20 @@ struct BuildError: Error, CustomStringConvertible {
     var description: String { message }
 }
 
+struct Result: Codable {
+    struct Item: Codable {
+        let outputPath: String
+        let value: String
+    }
+
+    let outputs: [Item]
+}
+
 @main
 struct RegisteryChecker: BuildToolPlugin {
     func createBuildCommands(context: PackagePlugin.PluginContext, target: any PackagePlugin.Target) async throws -> [PackagePlugin.Command] {
-        []
+        try checkRegistry(context: context)
+        return []
     }
 }
 
@@ -19,63 +29,50 @@ import XcodeProjectPlugin
 
 extension RegisteryChecker: XcodeBuildToolPlugin {
     func createBuildCommands(context: XcodeProjectPlugin.XcodePluginContext, target: XcodeProjectPlugin.XcodeTarget) throws -> [PackagePlugin.Command] {
-        let grep = try context.tool(named: "grep").path.string
-
-        let root = context.xcodeProject.directory.string
-        let excluded = context.xcodeProject.directory.appending("AutoRegistery").string
-        let serviceRegisteryFile = "\(context.xcodeProject.directory)/AutoRegistery/Sources/Registery/Registery.swift"
-
-        try checkServices(grep, excluded, root, serviceRegisteryFile)
-
+        try checkRegistry(context: context)
         return []
     }
 }
 #endif
 
-private func checkServices(_ grep: String, _ excluded: String, _ root: String, _ serviceRegisteryFile: String) throws {
+private func checkRegistry(context: Context) throws {
+    let sourcery = context.root.appending("bin").appending("sourcery").string
+    let template = context.root.appending("Registry.stencil").string
+    let sources = context.root.appending("..").string
+    let output = context.root.appending("Sources").appending("Registery").appending("Registry.generated.swift").string
+
     let task = Process()
     let pipe = Pipe()
 
     task.standardOutput = pipe
     task.standardError = pipe
-    task.launchPath = grep
-    task.arguments = ["--exclude-dir=\(excluded)", "--exclude=README.md", "-rhno", root, "-e", "^@Service\\((.*)\\)"]
+    task.launchPath = sourcery
+    task.arguments = ["--sources", sources, "--templates", template, "--output", output, "--disableCache", "--dry"]
     try task.run()
 
-    let data = pipe.fileHandleForReading.readDataToEndOfFile()
-    let output = String(data: data, encoding: .utf8)!
-
-    let services = output.components(separatedBy: "\n")
-        .compactMap({ $0.components(separatedBy: ":").last })
-        .filter({ !$0.isEmpty })
-        .map({ $0.replacingOccurrences(of: "@Service(", with: "") })
-        .map({ $0.replacingOccurrences(of: ".self)", with: "") })
-
-    guard
-        let data = FileManager.default.contents(atPath: serviceRegisteryFile),
-        let content = String(data: data, encoding: .utf8) else {
-        throw BuildError(message: "Could not find reference for services")
+    guard let data = try pipe.fileHandleForReading.readToEnd(), let value = try JSONDecoder().decode(Result.self, from: data).outputs.first(where: { $0.outputPath.hasSuffix("Registry.generated.swift") }) else {
+        throw BuildError(message: "Could not generate registry code to compare with the current registry.")
     }
-
-    let hash = "// hash_\(services.joined(separator: ",").sha256)"
-
-    if !content.hasPrefix(hash) {
-        throw BuildError(message: "Registery file is outdated, please regenerate it using AutoRegistery command.")
+    guard let fileContent = FileManager.default.contents(atPath: output), let fileContentString = String(data: fileContent, encoding: .utf8) else {
+        throw BuildError(message: "Could not read Registry.generated.swift file content.")
+    }
+    if value.value != fileContentString {
+        throw BuildError(message: "Registry file is outdated. Please regenerate it using command plugin and build project again.")
     }
 }
 
-extension HashFunction {
-    static func hash(_ string: String) -> String {
-        let data = string.data(using: .utf8)!
-        let hashedData = Self.hash(data: data)
-        return hashedData
-            .compactMap({ String(format: "%02x", $0) })
-            .joined()
+protocol Context {
+    var root: Path { get }
+}
+
+extension XcodeProjectPlugin.XcodePluginContext: Context {
+    var root: Path {
+        xcodeProject.directory.appending("AutoRegistery")
     }
 }
 
-extension String {
-    var sha256: String {
-        SHA256.hash(self)
+extension PackagePlugin.PluginContext: Context {
+    var root: Path {
+        package.directory
     }
 }

@@ -1,0 +1,11 @@
+{% for type in types.protocols where type.attributes["Service"] != nil %}
+import {{ type.name }}_Imp
+{% endfor %}
+
+public struct Registry {
+  public static func registerServices() {
+    {% for type in types.protocols where type.attributes["Service"] != nil %}
+    {{ type.name }}_Imp_Registry.register()
+    {% endfor %}
+  }
+}

@@ -14,8 +14,6 @@ import ServiceMacro
 @Implementation(DomainLibrary.self)
 public struct DomainLibrary_Imp: DomainLibrary {
 
-    public init() {}
-
     @Injected(\CoreLibrary_Container.coreLibrary) var core
 
     public func doSomething() {

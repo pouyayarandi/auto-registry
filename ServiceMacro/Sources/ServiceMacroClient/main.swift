@@ -1,7 +1,7 @@
 //import ServiceMacro
 //import Factory
 //
-//@Service(NetworkService.self)
+//@Service
 //public protocol NetworkService {
 //    func test()
 //}
@@ -12,10 +12,8 @@
 //}
 //
 //@Implementation(NetworkService.self)
-//struct NetworkServiceImp: NetworkService {
+//struct NetworkService_Imp: NetworkService {
 //    func test() {
 //
 //    }
 //}
-//
-//Registry.register()

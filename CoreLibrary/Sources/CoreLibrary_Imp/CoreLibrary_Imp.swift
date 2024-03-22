@@ -11,9 +11,6 @@ import ServiceMacro
 
 @Implementation(CoreLibrary.self)
 public struct CoreLibrary_Imp: CoreLibrary {
-
-    public init() {}
-
     public func text() -> String {
         "Hello World!"
     }

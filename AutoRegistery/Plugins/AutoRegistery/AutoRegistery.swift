@@ -1,17 +1,10 @@
 import PackagePlugin
 import Foundation
-import CryptoKit
 
 @main
 struct AutoRegistery: CommandPlugin {
     func performCommand(context: PackagePlugin.PluginContext, arguments: [String]) async throws {
-        let grep = try context.tool(named: "grep").path.string
-
-        let root = context.package.directory.appending("..").string
-        let excluded = context.package.directory.string
-        let serviceRegisteryFile = "\(context.package.directory)/Sources/Registery/Registery.swift"
-
-        try registerServices(grep, excluded, root, serviceRegisteryFile)
+        try generateRegistry(context: context)
     }
 }
 
@@ -20,78 +13,35 @@ import XcodeProjectPlugin
 
 extension AutoRegistery: XcodeCommandPlugin {
     func performCommand(context: XcodeProjectPlugin.XcodePluginContext, arguments: [String]) throws {
-        let grep = try context.tool(named: "grep").path.string
-
-        let root = context.xcodeProject.directory.string
-        let excluded = context.xcodeProject.directory.appending("AutoRegistery").string
-        let serviceRegisteryFile = "\(context.xcodeProject.directory)/AutoRegistery/Sources/Registery/Registery.swift"
-
-        try registerServices(grep, excluded, root, serviceRegisteryFile)
+        try generateRegistry(context: context)
     }
 }
 #endif
 
-private func registerServices(_ grep: String, _ excluded: String, _ root: String, _ serviceRegisteryFile: String) throws {
+private func generateRegistry(context: Context) throws {
+    let sourcery = context.root.appending("bin").appending("sourcery").string
+    let template = context.root.appending("Registry.stencil").string
+    let sources = context.root.appending("..").string
+    let output = context.root.appending("Sources").appending("Registery").appending("Registry.generated.swift").string
+
     let task = Process()
-    let pipe = Pipe()
-
-    task.standardOutput = pipe
-    task.standardError = pipe
-    task.launchPath = grep
-    task.arguments = ["--exclude-dir=\(excluded)", "--exclude=README.md", "-rhno", root, "-e", "^@Service\\((.*)\\)"]
+    task.launchPath = sourcery
+    task.arguments = ["--sources", sources, "--templates", template, "--output", output, "--disableCache"]
     try task.run()
-
-    let data = pipe.fileHandleForReading.readDataToEndOfFile()
-    let output = String(data: data, encoding: .utf8)!
-
-    let services = output.components(separatedBy: "\n")
-        .compactMap({ $0.components(separatedBy: ":").last })
-        .filter({ !$0.isEmpty })
-        .map({ $0.replacingOccurrences(of: "@Service(", with: "") })
-        .map({ $0.replacingOccurrences(of: ".self)", with: "") })
-
-    var file = """
-    // hash_\(services.joined(separator: ",").sha256)
-    //
-    // AUTO-GENERATED, Please don't change this file manually
-    // If you want to regenerate this file, run AutoRegistery
-    // command plugin.
-
-    import Factory
-    \(services.map({ "import \($0)_Imp" }).joined(separator: "\n"))
-
-    public struct Registry {
-      public static func registerServices() {
-
-    """
-    file += services.map({ "    \($0)_Imp_Registry.register()" }).joined(separator: "\n")
-    file += """
-
-      }
-    }
-
-    """
-
-    try file.write(toFile: serviceRegisteryFile, atomically: true, encoding: .utf8)
 }
 
-extension HashFunction {
-    static func hash(_ string: String) -> String {
-        let data = string.data(using: .utf8)!
-        let hashedData = Self.hash(data: data)
-        return hashedData
-            .compactMap({ String(format: "%02x", $0) })
-            .joined()
+protocol Context {
+    var root: Path { get }
+}
+
+extension XcodeProjectPlugin.XcodePluginContext: Context {
+    var root: Path {
+        xcodeProject.directory.appending("AutoRegistery")
     }
 }
 
-extension String {
-    var sha256: String {
-        SHA256.hash(self)
-    }
-
-    func camelcased() -> String {
-        guard !isEmpty else { return self }
-        return first!.lowercased() + self.dropFirst()
+extension PackagePlugin.PluginContext: Context {
+    var root: Path {
+        package.directory
     }
 }
