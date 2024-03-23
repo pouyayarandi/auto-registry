@@ -40,7 +40,7 @@ In this case the module should be named `MyService_Imp`.
 
 ```swift
 @Implementation(MyService.self)
-public struct MyService_Imp: MyService {
+private struct MyService_Imp: MyService {
   func helloWorld() {
     print("Hello World!")
   }

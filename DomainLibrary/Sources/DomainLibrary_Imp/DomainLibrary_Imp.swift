@@ -12,7 +12,7 @@ import CoreLibrary
 import ServiceMacro
 
 @Implementation(DomainLibrary.self)
-public struct DomainLibrary_Imp: DomainLibrary {
+private struct DomainLibrary_Imp: DomainLibrary {
 
     @Injected(\CoreLibrary_Container.coreLibrary) var core
 

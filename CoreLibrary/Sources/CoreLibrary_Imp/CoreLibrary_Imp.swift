@@ -10,7 +10,7 @@ import CoreLibrary
 import ServiceMacro
 
 @Implementation(CoreLibrary.self)
-public struct CoreLibrary_Imp: CoreLibrary {
+private struct CoreLibrary_Imp: CoreLibrary {
     public func text() -> String {
         "Hello World!"
     }
