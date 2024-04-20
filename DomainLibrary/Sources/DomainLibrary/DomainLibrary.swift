@@ -2,7 +2,7 @@
 // https://docs.swift.org/swift-book
 
 import Factory
-import ServiceMacro
+import Services
 
 // sourcery: imp-module = DomainLibrary_Imp
 @Service

@@ -2,7 +2,7 @@
 // https://docs.swift.org/swift-book
 
 import Factory
-import ServiceMacro
+import Services
 
 @Service
 public protocol CoreLibrary {

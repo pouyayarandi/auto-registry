@@ -17,7 +17,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/hmlongco/Factory.git", from: "2.3.1"),
-        .package(path: "../ServiceMacro"),
+        .package(path: "../Services"),
         .package(path: "../CoreLibrary"),
     ],
     targets: [
@@ -25,10 +25,10 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "DomainLibrary",
-            dependencies: ["Factory", "ServiceMacro"]),
+            dependencies: ["Factory", "Services"]),
         .target(
             name: "DomainLibrary_Imp",
-            dependencies: ["DomainLibrary", "Factory", "CoreLibrary", "ServiceMacro"]),
+            dependencies: ["DomainLibrary", "Factory", "CoreLibrary", "Services"]),
         .testTarget(
             name: "DomainLibraryTests",
             dependencies: ["DomainLibrary"]),

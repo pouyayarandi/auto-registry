@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreLibrary
-import ServiceMacro
+import Services
 
 @Implementation(CoreLibrary.self)
 private struct CoreLibrary_Imp: CoreLibrary {

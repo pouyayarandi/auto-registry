@@ -126,7 +126,6 @@
 			);
 			mainGroup = 839167AA2B9F262D00F7C98B;
 			packageReferences = (
-				832FB6672BA03F3200589DE3 /* XCLocalSwiftPackageReference "ServiceMacro" */,
 				837684B32BA07920002EA6C6 /* XCLocalSwiftPackageReference "AutoRegistery" */,
 				835ED3A72BA1C3E500283C97 /* XCLocalSwiftPackageReference "DomainLibrary" */,
 			);
@@ -395,10 +394,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		832FB6672BA03F3200589DE3 /* XCLocalSwiftPackageReference "ServiceMacro" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ServiceMacro;
-		};
 		835ED3A72BA1C3E500283C97 /* XCLocalSwiftPackageReference "DomainLibrary" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = DomainLibrary;

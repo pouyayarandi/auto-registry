@@ -17,17 +17,17 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/hmlongco/Factory.git", from: "2.3.1"),
-        .package(path: "../ServiceMacro"),
+        .package(path: "../Services"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "CoreLibrary",
-            dependencies: ["Factory", "ServiceMacro"]),
+            dependencies: ["Factory", "Services"]),
         .target(
             name: "CoreLibrary_Imp",
-            dependencies: ["CoreLibrary", "ServiceMacro"]),
+            dependencies: ["CoreLibrary", "Services"]),
         .testTarget(
             name: "CoreLibraryTests",
             dependencies: ["CoreLibrary"]),

@@ -58,7 +58,7 @@ extension String {
 }
 
 @main
-struct ServiceMacroPlugin: CompilerPlugin {
+struct ServicesMacroPlugin: CompilerPlugin {
     let providingMacros: [Macro.Type] = [
         ServiceAPIMacro.self,
         ServiceImplementationMacro.self,

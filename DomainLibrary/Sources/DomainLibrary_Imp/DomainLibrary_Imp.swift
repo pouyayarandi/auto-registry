@@ -9,7 +9,7 @@ import Foundation
 import DomainLibrary
 import Factory
 import CoreLibrary
-import ServiceMacro
+import Services
 
 @Implementation(DomainLibrary.self)
 private struct DomainLibrary_Imp: DomainLibrary {
