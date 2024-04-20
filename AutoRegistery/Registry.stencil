@@ -1,5 +1,9 @@
 {% for type in types.protocols where type.attributes["Service"] != nil %}
+{% if type.annotations["imp-module"] != nil %}
+import {{ type.annotations["imp-module"] }}
+{% else %}
 import {{ type.name }}_Imp
+{% endif %}
 {% endfor %}
 
 public struct Registry {

@@ -4,6 +4,7 @@
 import Factory
 import ServiceMacro
 
+// sourcery: imp-module = DomainLibrary_Imp
 @Service
 public protocol DomainLibrary {
     func doSomething()

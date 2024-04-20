@@ -10,9 +10,6 @@ struct BuildError: Error, CustomStringConvertible {
 
 public struct ServiceAPIMacro: PeerMacro {
     public static func expansion(of node: SwiftSyntax.AttributeSyntax, providingPeersOf declaration: some SwiftSyntax.DeclSyntaxProtocol, in context: some SwiftSyntaxMacros.MacroExpansionContext) throws -> [SwiftSyntax.DeclSyntax] {
-        if node.description.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "") != node.description.trimmingCharacters(in: .whitespacesAndNewlines) {
-            throw BuildError(message: "Use no whitespace in @Service argument")
-        }
         guard let proto = declaration.as(ProtocolDeclSyntax.self) else {
             throw BuildError(message: "Service must be protocol")
         }
