@@ -91,7 +91,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				833CBC972BA19A1A00F95E69 /* PBXTargetDependency */,
+				8315F6012BD42E050029E0D6 /* PBXTargetDependency */,
 			);
 			name = Dependency;
 			packageProductDependencies = (
@@ -166,9 +166,9 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		833CBC972BA19A1A00F95E69 /* PBXTargetDependency */ = {
+		8315F6012BD42E050029E0D6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			productRef = 833CBC962BA19A1A00F95E69 /* RegisteryChecker */;
+			productRef = 8315F6002BD42E050029E0D6 /* RegisteryChecker */;
 		};
 /* End PBXTargetDependency section */
 
@@ -410,7 +410,7 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		833CBC962BA19A1A00F95E69 /* RegisteryChecker */ = {
+		8315F6002BD42E050029E0D6 /* RegisteryChecker */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 837684B32BA07920002EA6C6 /* XCLocalSwiftPackageReference "AutoRegistery" */;
 			productName = "plugin:RegisteryChecker";

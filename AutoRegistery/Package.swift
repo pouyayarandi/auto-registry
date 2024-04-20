@@ -3,6 +3,11 @@
 
 import PackageDescription
 
+let registryDependencies: [Target.Dependency] = [
+    .serviceProduct(name: "CoreLibrary"),
+    .serviceProduct(name: "DomainLibrary"),
+]
+
 let package = Package(
     name: "AutoRegistery",
     platforms: [.iOS(.v13)],
@@ -18,7 +23,9 @@ let package = Package(
             name: "Registery",
             targets: ["Registery"])
     ],
-    dependencies: [],
+    dependencies: registryDependencies
+        .compactMap(\.package)
+        .map({ .package(path: "../\($0)") }),
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
@@ -40,7 +47,20 @@ let package = Package(
         ),
         .target(
             name: "Registery",
-            dependencies: []
+            dependencies: registryDependencies
         )
     ]
 )
+
+extension Target.Dependency {
+    var package: String? {
+        if case .productItem(name: _, package: let p, moduleAliases: _, condition: _) = self {
+            return p
+        }
+        return nil
+    }
+
+    static func serviceProduct(name: String) -> Self {
+        return .product(name: "\(name)_Imp", package: name)
+    }
+}
