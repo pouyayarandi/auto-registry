@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8338DD942BD47537000EECDD /* Registry in Frameworks */ = {isa = PBXBuildFile; productRef = 8338DD932BD47537000EECDD /* Registry */; };
 		839167B72B9F262D00F7C98B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839167B62B9F262D00F7C98B /* AppDelegate.swift */; };
 		839167B92B9F262D00F7C98B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839167B82B9F262D00F7C98B /* SceneDelegate.swift */; };
 		839167BB2B9F262D00F7C98B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839167BA2B9F262D00F7C98B /* ViewController.swift */; };
 		839167BE2B9F262D00F7C98B /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 839167BD2B9F262D00F7C98B /* Base */; };
 		839167C02B9F262E00F7C98B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 839167BF2B9F262E00F7C98B /* Assets.xcassets */; };
 		839167C32B9F262E00F7C98B /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 839167C22B9F262E00F7C98B /* Base */; };
-		83F5935B2BA0D2970054C35F /* Registery in Frameworks */ = {isa = PBXBuildFile; productRef = 83F5935A2BA0D2970054C35F /* Registery */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83F5935B2BA0D2970054C35F /* Registery in Frameworks */,
+				8338DD942BD47537000EECDD /* Registry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,11 +91,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				8315F6012BD42E050029E0D6 /* PBXTargetDependency */,
+				8338DD962BD47548000EECDD /* PBXTargetDependency */,
 			);
 			name = Dependency;
 			packageProductDependencies = (
-				83F5935A2BA0D2970054C35F /* Registery */,
+				8338DD932BD47537000EECDD /* Registry */,
 			);
 			productName = Dependency;
 			productReference = 839167B32B9F262D00F7C98B /* Dependency.app */;
@@ -126,8 +126,8 @@
 			);
 			mainGroup = 839167AA2B9F262D00F7C98B;
 			packageReferences = (
-				837684B32BA07920002EA6C6 /* XCLocalSwiftPackageReference "AutoRegistery" */,
 				835ED3A72BA1C3E500283C97 /* XCLocalSwiftPackageReference "DomainLibrary" */,
+				8338DD902BD47501000EECDD /* XCLocalSwiftPackageReference "ServiceRegistry" */,
 			);
 			productRefGroup = 839167B42B9F262D00F7C98B /* Products */;
 			projectDirPath = "";
@@ -165,9 +165,9 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8315F6012BD42E050029E0D6 /* PBXTargetDependency */ = {
+		8338DD962BD47548000EECDD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			productRef = 8315F6002BD42E050029E0D6 /* RegisteryChecker */;
+			productRef = 8338DD952BD47548000EECDD /* RegistryChecker */;
 		};
 /* End PBXTargetDependency section */
 
@@ -394,26 +394,26 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		8338DD902BD47501000EECDD /* XCLocalSwiftPackageReference "ServiceRegistry" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ServiceRegistry;
+		};
 		835ED3A72BA1C3E500283C97 /* XCLocalSwiftPackageReference "DomainLibrary" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = DomainLibrary;
 		};
-		837684B32BA07920002EA6C6 /* XCLocalSwiftPackageReference "AutoRegistery" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = AutoRegistery;
-		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8315F6002BD42E050029E0D6 /* RegisteryChecker */ = {
+		8338DD932BD47537000EECDD /* Registry */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 837684B32BA07920002EA6C6 /* XCLocalSwiftPackageReference "AutoRegistery" */;
-			productName = "plugin:RegisteryChecker";
+			package = 8338DD902BD47501000EECDD /* XCLocalSwiftPackageReference "ServiceRegistry" */;
+			productName = Registry;
 		};
-		83F5935A2BA0D2970054C35F /* Registery */ = {
+		8338DD952BD47548000EECDD /* RegistryChecker */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 837684B32BA07920002EA6C6 /* XCLocalSwiftPackageReference "AutoRegistery" */;
-			productName = Registery;
+			package = 8338DD902BD47501000EECDD /* XCLocalSwiftPackageReference "ServiceRegistry" */;
+			productName = "plugin:RegistryChecker";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

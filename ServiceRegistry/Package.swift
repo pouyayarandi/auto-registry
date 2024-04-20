@@ -9,19 +9,19 @@ let registryDependencies: [Target.Dependency] = [
 ]
 
 let package = Package(
-    name: "AutoRegistery",
+    name: "ServiceRegistry",
     platforms: [.iOS(.v13)],
     products: [
         // Products can be used to vend plugins, making them visible to other packages.
         .plugin(
-            name: "AutoRegistery",
-            targets: ["AutoRegistery"]),
+            name: "ServiceRegistry",
+            targets: ["ServiceRegistry"]),
         .plugin(
-            name: "RegisteryChecker",
-            targets: ["RegisteryChecker"]),
+            name: "RegistryChecker",
+            targets: ["RegistryChecker"]),
         .library(
-            name: "Registery",
-            targets: ["Registery"])
+            name: "Registry",
+            targets: ["Registry"])
     ],
     dependencies: registryDependencies
         .compactMap(\.package)
@@ -30,23 +30,23 @@ let package = Package(
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .plugin(
-            name: "AutoRegistery",
+            name: "ServiceRegistry",
             capability: .command(
-                intent: .custom(verb: "generate-registery", description: ""),
+                intent: .custom(verb: "generate-registry", description: ""),
                 permissions: [
                     .writeToPackageDirectory(
                         reason: """
-                        In order to generate registery file it
+                        In order to generate registry file it
                         will be needed to have write permission
                         """)
                 ])
         ),
         .plugin(
-            name: "RegisteryChecker",
+            name: "RegistryChecker",
             capability: .buildTool()
         ),
         .target(
-            name: "Registery",
+            name: "Registry",
             dependencies: registryDependencies
         )
     ]
