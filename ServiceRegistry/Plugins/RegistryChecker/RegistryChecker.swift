@@ -36,10 +36,10 @@ extension RegisteryChecker: XcodeBuildToolPlugin {
 #endif
 
 private func checkRegistry(context: Context) throws {
-    let sourcery = context.root.appending("bin").appending("sourcery").string
-    let template = context.root.appending("Registry.stencil").string
-    let sources = context.root.appending("..").string
-    let output = context.root.appending("Sources").appending("Registry").appending("Registry.generated.swift").string
+    let sources = context.root.string
+    let sourcery = context.plugin.appending("bin").appending("sourcery").string
+    let template = context.plugin.appending("Registry.stencil").string
+    let output = context.plugin.appending("Sources").appending("Registry").appending("Registry.generated.swift").string
 
     let task = Process()
     let pipe = Pipe()
@@ -63,16 +63,25 @@ private func checkRegistry(context: Context) throws {
 
 protocol Context {
     var root: Path { get }
+    var plugin: Path { get }
 }
 
 extension XcodeProjectPlugin.XcodePluginContext: Context {
     var root: Path {
-        xcodeProject.directory.appending("ServiceRegistry")
+        xcodeProject.directory
+    }
+
+    var plugin: Path {
+        root.appending("ServiceRegistry")
     }
 }
 
 extension PackagePlugin.PluginContext: Context {
     var root: Path {
+        package.directory.appending("..")
+    }
+
+    var plugin: Path {
         package.directory
     }
 }
